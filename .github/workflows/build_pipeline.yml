@@ -88,7 +88,7 @@ jobs:
         if: ${{ always() }}
         uses: actions/upload-artifact@v2
         with:
-          name: logs
+          name: logs-${{ matrix.os }}
           path: |
             ${{ runner.workspace }}/**/CMakeOutput.log
             ${{ runner.workspace }}/**/CMakeError.log
