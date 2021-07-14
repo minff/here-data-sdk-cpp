@@ -90,8 +90,8 @@ jobs:
         with:
           name: logs
           path: |
-            ${{ github.workspace }}/**/CMakeOutput.log
-            ${{ github.workspace }}/**/CMakeError.log
-            ${{ github.workspace }}/**/stdout.log
-            ${{ github.workspace }}/**/stderr.log
-            ${{ github.workspace }}/**/bootstrap.log
+            ${{ runner.workspace }}/**/CMakeOutput.log
+            ${{ runner.workspace }}/**/CMakeError.log
+            ${{ runner.workspace }}/**/stdout.log
+            ${{ runner.workspace }}/**/stderr.log
+            ${{ runner.workspace }}/**/bootstrap.log
