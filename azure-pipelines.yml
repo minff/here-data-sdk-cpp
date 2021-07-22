@@ -26,6 +26,15 @@ jobs:
   steps:
   - bash: scripts/windows/build.sh
     displayName: 'Windows Build'
+  - task: CopyFiles@2
+    inputs:
+      sourceFolder: '$(Build.SourcesDirectory)'
+      contents: '**/build/**/?(*.exe|*.dll|*.pdb|*.lib)'
+      targetFolder: '$(Build.ArtifactStagingDirectory)'
+  - task: PublishBuildArtifacts@1
+    inputs:
+      pathToPublish: '$(Build.ArtifactStagingDirectory)'
+      artifactName: artifacts-windows
 
 - job: MacOS_build
   pool:
