@@ -98,10 +98,10 @@ jobs:
         with:
           name: build-${{ matrix.os }}
           path: |
-            ${{ runner.workspace }}/build/**/*.dll
-            ${{ runner.workspace }}/build/**/*.lib
-            ${{ runner.workspace }}/build/**/*.pdb
-            ${{ runner.workspace }}/build/**/*.exe
+            ${{ runner.workspace }}/**/*.dll
+            ${{ runner.workspace }}/**/*.lib
+            ${{ runner.workspace }}/**/*.pdb
+            ${{ runner.workspace }}/**/*.exe
             
       - name: Archive logs
         if: ${{ always() }}
