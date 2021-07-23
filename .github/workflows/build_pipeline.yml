@@ -18,6 +18,7 @@ jobs:
             triplet: x64-windows
             vcpkgCommitId: '30124253eecff36bc90f73341edbfb4f845e2a1e'
             vcpkgPackages: 'sqlite3'
+            VS150COMNTOOLS: "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Enterprise"
           - os: ubuntu-latest
             triplet: x64-linux
             vcpkgCommitId: '30124253eecff36bc90f73341edbfb4f845e2a1e'
