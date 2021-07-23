@@ -7,6 +7,8 @@ on:
 
 jobs:
   job:
+    env:
+      BUILD_TYPE: "RelWithDebInfo"
     name: ${{ matrix.os }}-build
     runs-on: ${{ matrix.os }}
     strategy:
