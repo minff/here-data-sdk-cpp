@@ -6,40 +6,40 @@ on:
       - build
 
 jobs:
-  job:
-    env:
-      BUILD_TYPE: "RelWithDebInfo"
-    name: ${{ matrix.os }}-build
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-latest, macos-latest, windows-2016]
-        include:
-          - os: windows-2016
-            triplet: x64-windows
-            vcpkgCommitId: '30124253eecff36bc90f73341edbfb4f845e2a1e'
-            vcpkgPackages: 'sqlite3'
-            VS150COMNTOOLS: "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Enterprise"
-          - os: ubuntu-latest
-            triplet: x64-linux
-            vcpkgCommitId: '30124253eecff36bc90f73341edbfb4f845e2a1e'
-            vcpkgPackages: 'sqlite3'
-          - os: macos-latest
-            triplet: x64-osx
-            vcpkgCommitId: '30124253eecff36bc90f73341edbfb4f845e2a1e'
-            vcpkgPackages: 'sqlite3'
+#   job:
+#     env:
+#       BUILD_TYPE: "RelWithDebInfo"
+#     name: ${{ matrix.os }}-build
+#     runs-on: ${{ matrix.os }}
+#     strategy:
+#       fail-fast: false
+#       matrix:
+#         os: [ubuntu-latest, macos-latest, windows-2016]
+#         include:
+#           - os: windows-2016
+#             triplet: x64-windows
+#             vcpkgCommitId: '30124253eecff36bc90f73341edbfb4f845e2a1e'
+#             vcpkgPackages: 'sqlite3'
+#             VS150COMNTOOLS: "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Enterprise"
+#           - os: ubuntu-latest
+#             triplet: x64-linux
+#             vcpkgCommitId: '30124253eecff36bc90f73341edbfb4f845e2a1e'
+#             vcpkgPackages: 'sqlite3'
+#           - os: macos-latest
+#             triplet: x64-osx
+#             vcpkgCommitId: '30124253eecff36bc90f73341edbfb4f845e2a1e'
+#             vcpkgPackages: 'sqlite3'
 
-    steps:
-      - uses: actions/checkout@v1
-        with:
-          submodules: true
-      - name: show_env
-        run: echo $VS150COMNTOOLS
-        shell: bash
-      - name: build
-        run: ./scripts/windows/build.sh
-        shell: bash
+#     steps:
+#       - uses: actions/checkout@v1
+#         with:
+#           submodules: true
+#       - name: show_env
+#         run: echo VS150COMNTOOLS=$VS150COMNTOOLS
+#         shell: bash
+#       - name: build
+#         run: ./scripts/windows/build.sh
+#         shell: bash
         
 #       - uses: lukka/get-cmake@latest
 #       - name: dir
@@ -93,6 +93,26 @@ jobs:
 #           buildDirectory: '${{ runner.workspace }}/b/ninja-bash/'
 #           useShell: bash
       
+  job2:
+    env:
+      BUILD_TYPE: "RelWithDebInfo"
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          submodules: true
+      - uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: x64
+      - name: show_env
+        run: echo VS150COMNTOOLS=$VS150COMNTOOLS
+        shell: bash
+      - name: build
+        run: ./scripts/windows/build.sh
+        shell: bash
+        
+        
+        
       - name: Archive build artifacts
         uses: actions/upload-artifact@v2
         with:
@@ -100,9 +120,7 @@ jobs:
           path: |
             ${{ runner.workspace }}/**/*.dll
             ${{ runner.workspace }}/**/*.lib
-            ${{ runner.workspace }}/**/*.pdb
             ${{ runner.workspace }}/**/*.exe
-            
       - name: Archive logs
         if: ${{ always() }}
         uses: actions/upload-artifact@v2
