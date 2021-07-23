@@ -18,7 +18,9 @@ jobs:
         with:
           arch: x64
       - name: vs
-        run: vcvarsall.bat x64
+        run: |
+          "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" x64
+        shell: cmd
       - name: show_env
         run: echo VS150COMNTOOLS=$VS150COMNTOOLS
         shell: bash
