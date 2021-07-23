@@ -93,6 +93,16 @@ jobs:
 #           buildDirectory: '${{ runner.workspace }}/b/ninja-bash/'
 #           useShell: bash
       
+      - name: Archive build artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: build-${{ matrix.os }}
+          path: |
+            ${{ runner.workspace }}/build/**/*.dll
+            ${{ runner.workspace }}/build/**/*.lib
+            ${{ runner.workspace }}/build/**/*.pdb
+            ${{ runner.workspace }}/build/**/*.exe
+            
       - name: Archive logs
         if: ${{ always() }}
         uses: actions/upload-artifact@v2
