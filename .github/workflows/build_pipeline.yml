@@ -25,7 +25,13 @@ jobs:
         run: echo VS150COMNTOOLS=$VS150COMNTOOLS
         shell: bash
       - name: build
-        run: ./scripts/windows/build.sh
+        run: |
+          [[ -d "build" ]] && rm -rf build
+          mkdir build && cd build
+          cmake .. -G "Visual Studio 15 2017 Win64" \
+                  -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
+                  -DBUILD_SHARED_LIBS=ON
+          cmake --build . --config $BUILD_TYPE
         shell: bash
   
       - name: Archive build artifacts
